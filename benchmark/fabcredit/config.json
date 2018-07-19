@@ -1,32 +1,32 @@
 {
   "blockchain": {
     "type": "fabric",
-    "config": "benchmark/drm/fabric.json"
+    "config": "benchmark/fabcredit/fabric.json"
   },
   "command" : {
     "start": "docker-compose -f network/fabric/simplenetwork/docker-compose.yaml up -d",
     "end" : "docker-compose -f network/fabric/simplenetwork/docker-compose.yaml down;docker rm $(docker ps -aq)"
   },
   "test": {
-    "name": "drm",
-    "description" : "Benchmark for DRM scenario",
+    "name": "fabcredit",
+    "description" : "Benchmark for fabcredit scenario",
     "clients": {
       "type": "local",
       "number": 1
     },
     "rounds": [
       {
-        "label" : "publish",
+        "label" : "changeCardLoanCredit",
         "txNumber" : [1],
-        "arguments": {  "itemBytes": 2048000 },
+        "arguments": {  "PersonalCredit0": -500000 },
         "rateControl" : [{"type": "fixed-rate", "opts": {"tps" : 1}}],
-        "callback" : "benchmark/drm/publish.js"
+        "callback" : "benchmark/fabcredit/changeCardLoanCredit.js"
       },
       {
-        "label" : "query",
+        "label" : "queryCredit",
         "txNumber" : [1],
         "rateControl" : [{"type": "fixed-rate", "opts": {"tps" : 1}}],
-        "callback" : "benchmark/drm/query.js"
+        "callback" : "benchmark/fabcredit/queryCredit.js"
       }]
   },
   "monitor": {
