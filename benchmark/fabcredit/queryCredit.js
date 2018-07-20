@@ -8,21 +8,21 @@
 
 'use strict';
 
-module.exports.info  = 'querying digital items';
+module.exports.info  = 'querying';
 
 let bc, contx;
-let itemIDs;
+let Key;
 module.exports.init = function(blockchain, context, args) {
-    const publish = require('./publish.js');
+    const changeCardLoanCredit = require('./changeCardLoanCredit.js');
     bc      = blockchain;
     contx   = context;
-    itemIDs = publish.ids;
+    Key = changeCardLoanCredit.Key;
     return Promise.resolve();
 };
 
 module.exports.run = function() {
-    const id  = itemIDs[Math.floor(Math.random()*(itemIDs.length))];
-    return bc.queryState(contx, 'drm', 'v0', id);
+    const thiskey  = Key[Math.floor(Math.random()*(Key.length))];
+    return bc.queryState(contx, 'fabcredit', 'v0', thiskey);
 };
 
 module.exports.end = function(results) {

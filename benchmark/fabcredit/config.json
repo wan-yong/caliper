@@ -18,7 +18,7 @@
       {
         "label" : "changeCardLoanCredit",
         "txNumber" : [1],
-        "arguments": {  "PersonalCredit0": -500000 },
+        "arguments": { "Key": "PersonalCredit0", "CreditCardLoan": "-500000" },
         "rateControl" : [{"type": "fixed-rate", "opts": {"tps" : 1}}],
         "callback" : "benchmark/fabcredit/changeCardLoanCredit.js"
       },

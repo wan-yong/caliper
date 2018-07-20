@@ -1,6 +1,6 @@
 /**
 * Changed from 
-* Copyright 2017 HUAWEI. All Rights Reserved.
+* Copyright
 * Author: Yong Wan
 * SPDX-License-Identifier: Apache-2.0
 **/
@@ -13,33 +13,36 @@ const crypto = require('crypto');
 module.exports.info  = 'change the Credit Card Loan'; //修改
 
 let bc, contx;
-let itemBytes = 1024;   // 修改，对应 config.json的"arguments": {  "itemBytes": 2048000 }
-let ids = [];           // save the generated item ids
+let Key = 'PersonalCredit0' //修改，保存目标的Key值
 
-module.exports.ids = ids;
+module.exports.Key = Key;
+
+let CreditCardLoan = '-1000';   // 修改，对应 config.json的"arguments": {  "CreditCardLoan": 2048000 }
 
 module.exports.init = function(blockchain, context, args) {
-    if(args.hasOwnProperty('itemBytes') ) {
-        itemBytes = args.itemBytes;
+    if(args.hasOwnProperty('Key') ) {
+        Key = args.Key;
+    }
+
+    if(args.hasOwnProperty('CreditCardLoan') ) {
+        CreditCardLoan = args.CreditCardLoan;
     }
 
     bc       = blockchain;
     contx    = context;
+
+    bc.invokeSmartContract(contx, 'fabcredit', 'v0', {verb : 'initLedger'}, 120);
+    
     return Promise.resolve();
 };
 
 module.exports.run = function() {
-    const date   = new Date();
-    const today  = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-    const author = process.pid.toString();
-    const buf    = crypto.randomBytes(itemBytes).toString('base64');
+    
     const item = {
-        'author' : author,
-        'createtime' : today,
-        'info' : '',
-        'item' : buf
+        'Key' : Key,
+        'CreditCardLoan' : CreditCardLoan,
     };
-    return bc.invokeSmartContract(contx, 'drm', 'v0', {verb : 'changeCardLoanCredit', item: JSON.stringify(item)}, 120);
+    return bc.invokeSmartContract(contx, 'fabcredit', 'v0', {verb : 'changeCardLoanCredit', item: JSON.stringify(item)}, 120);
 };
 
 module.exports.end = function(results) {
