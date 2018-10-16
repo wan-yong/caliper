@@ -139,7 +139,7 @@ class Fabric extends BlockchainInterface{
     }
 
     /**
-     * Query the given chaincode according to the specified options.
+     * Query the given chaincode according to the specified keys.
      * @param {object} context The Fabric context returned by {getContext}.
      * @param {string} contractID The name of the chaincode.
      * @param {string} contractVer The version of the chaincode.
@@ -149,6 +149,19 @@ class Fabric extends BlockchainInterface{
     queryState(context, contractID, contractVer, key) {
         // TODO: change string key to general object
         return e2eUtils.querybycontext(context, contractID, contractVer, key.toString());
+    }
+
+    /**
+     * Query the given chaincode according to the specified args.
+     * @param {object} context The Fabric context returned by {getContext}.
+     * @param {string} contractID The name of the chaincode.
+     * @param {string} contractVer The version of the chaincode.
+     * @param {string} args The argument to pass to the chaincode query.
+     * @return {Promise<object>} The promise for the result of the execution.
+     */
+    queryStateWithArgs(context, contractID, contractVer, args) {
+        // TODO: change string key to general object
+        return e2eUtils.querybycontext(context, contractID, contractVer, args.toString());
     }
 }
 module.exports = Fabric;

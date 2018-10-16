@@ -94,6 +94,17 @@ class BlockchainInterface {
     }
 
     /**
+     * Query state from the ledger
+     * @param {Object} context context object from getContext
+     * @param {String} contractID identiy of the contract
+     * @param {String} contractVer version of the contract
+     * @param {Array} args lookup args
+     */
+    queryStateWithArgs(context, contractID, contractVer, args) {
+        throw new Error('queryStateWithArgs is not implemented for this blockchain system');
+    }
+
+    /**
      * Get adapter specific transaction statistics
      * @param {JSON} stats txStatistics object
      * @param {Array} results array of txStatus objects

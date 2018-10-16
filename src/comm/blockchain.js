@@ -139,6 +139,18 @@ class Blockchain {
         return this.bcObj.queryState(context, contractID, contractVer, key);
     }
 
+    /**待完善，需要和Linux社区商量，如何修改该共性代码
+     * Query state with args from the ledger
+     * @param {Object} context context object from getContext
+     * @param {String} contractID identiy of the contract
+     * @param {String} contractVer version of the contract
+     * @param {Array} args array of JSON formatted arguments for lookup key
+     * @return {Promise} as invokeSmateContract()
+     */
+    queryStateWithArgs(context, contractID, contractVer, args) {
+        return this.bcObj.queryStateWithArgs(context, contractID, contractVer, args);
+    }
+
     /**
     * Calculate the default transaction statistics
     * @param {Array} results array of txStatus
