@@ -1,7 +1,7 @@
 {
   "blockchain": {
     "type": "fabric",
-    "config": "benchmark/simple/fabric.json"
+    "config": "benchmark/falcon/fabric.json"
   },
   "command" : {
     "start": "docker-compose -f network/fabric/simplenetwork/docker-compose.yaml up -d",
@@ -19,7 +19,7 @@
         "txNumber" : [1000, 1000, 1000],
         "rateControl" : [{"type": "fixed-rate", "opts": {"tps" : 50}}, {"type": "fixed-rate", "opts": {"tps" : 100}}, {"type": "fixed-rate", "opts": {"tps" : 150}}],
         "arguments": { "prodCode": "MPB0002", "cOnManuQty": 2 },
-        "callback" : "benchmark/simple/createOnManu.js"
+        "callback" : "benchmark/falcon/createOnManu.js"
       }]
   },
   "monitor": {
